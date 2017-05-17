@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+    <style>
+    	body{
+
+    	}
+    </style>
+</head>
+<body>
+        <ul id="myList">
+            <li id="meList">张三</li>
+            <li id="lsList">李四</li>
+            <li id="wwList">王五</li>
+        </ul>
+        <p >点击按钮来删除列表中的首个项目。</p>
+        <button onclick="myFunction()">试一下</button>
+        <button onclick="meFunction()">删除父亲节点</button>
+        <script>
+        function myFunction()
+        {
+            var list=document.getElementById("myList");
+            list.removeChild(list.childNodes[0]);
+        }
+        function meFunction(){
+            var meList = document.getElementById('meList');
+            var myList = document.getElementById('myList');
+
+                meList.parentNode.removeChild(myList.childNodes[0].length);
+
+            // var list = document.getElementById('meList');
+            // list.parentNode.removeChild(document.getElementById('lsList'));
+            // alert(list.parentNode);
+        }
+        document.getElementById('wwList').parentNode.insertAdjacentHTML('beforeend','<li>王帅锅</li>')
+        document.getElementById('myList').childNodes[1].insertAdjacentHTML('afterend','<li>詹帅锅</li>')
+        document.getElementById('lsList').insertAdjacentHTML('beforebegin','<li>丁帅锅</li>')
+        document.getElementById('meList').insertAdjacentHTML('afterbegin','<li>孙帅锅</li>')
+
+        console.log(document.querySelector('body').parentNode);
+        //alert(document.querySelector('body').parentNode);
+        </script>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-tab.js"></script>
+<script type="text/javascript">
+	apiready = function(){
+
+	};
+    function myFunction(){
+        var list=document.getElementById("myList");
+        list.removeChild(list.childNodes[0]);
+
+    }
+</script>
+</script>
+</html>

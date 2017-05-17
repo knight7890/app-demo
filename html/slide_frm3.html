@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+    ul,li,p{padding:0;list-style:none;margin:10px;}
+</style>
+<script>
+    window.onload = function (){
+        //通过id，TagName获取元素
+        var oUl = document.getElementById('list');
+        var oLi = oUl.getElementsByTagName('li');
+        var oImg = oUl.getElementsByTagName('img');
+        var oP = document.getElementsByTagName('p')[0];
+        var aImg = oP.getElementsByTagName('img');
+        var aStrong = document.getElementsByTagName('strong');
+        var aSpan = document.getElementsByTagName('span');
+        var aEm = document.getElementsByTagName('em');
+
+        var arr = [];//定义一个空数组存放em里的单价
+        var uRl = [];//定义一个空数组存放oImg的src
+        //计算商品总和
+        function fnAdd(){
+            var num = 0;
+            var price = 0;
+            for (var i=0;i<aStrong.length;i++){
+                num += Number(aStrong[i].innerHTML);
+                price += parseFloat(aSpan[i].innerHTML);
+                 //用判断aStrong[i]是否大于0，大于0时获取aEm里的单价
+            if (aStrong[i].innerHTML>0){
+                arr[i] = parseFloat(aEm[i].innerHTML);
+                uRl[i] = oImg[i].src;
+            }else{
+                arr[i] = 0;
+                if (typeof uRl[i]==='undefined'){
+                    uRl[i] = 'img/shoppingacart.png';
+                };
+            };
+
+        };
+          var iMax = arr[0];//定义arr里的一个值拿来做比较
+          var aMax = uRl[0];
+          for (var i=1;i<arr.length;i++){
+            if (iMax<arr[i]){
+                iMax = arr[i];
+                aMax = uRl[i];
+            };
+          };
+         oP.innerHTML = '商品共计：'+ num +'件，合计：'+ price +'元,其中最贵的商品：'+ iMax +'元<img src ="'+ aMax +'">';
+        };
+
+        //通过传参找到每个li下的元素
+        for (var i=0;i<oLi.length;i++){
+            arr.push(0);//往arr数组里动态获取0;
+            uRl.push(oImg.src);//往uRl数组里动态获取图片
+           fnTag(oLi[i]);
+        };
+
+        function fnTag(oLi){
+            var oInput = oLi.getElementsByTagName('input');
+            var oStrong = oLi.getElementsByTagName('strong')[0];
+            var oEm = oLi.getElementsByTagName('em')[0];
+            var oSpan = oLi.getElementsByTagName('span')[0];
+
+            var n1 = Number(oStrong.innerHTML);
+            var n2 = parseFloat(oEm.innerHTML);
+
+           //点击商品减数
+            oInput[0].onclick = function (){
+                n1--;
+                if (n1<0){
+                    n1=0;
+                };
+                oStrong.innerHTML = n1;
+                oSpan.innerHTML = n1*n2+'元';
+                fnAdd();
+            };
+
+            //点击商品加数
+            oInput[1].onclick = function (){
+                n1++;
+                oStrong.innerHTML = n1;
+                oSpan.innerHTML = n1*n2+'元';
+                fnAdd();
+            };
+        };
+    };
+</script>
+</head>
+<body>
+    <ul id="list">
+        <li>
+        <img src="../image/B.png"/>
+            <input type="button" value="-"/>
+            <strong>0</strong>
+            <input type="button" value="+"/>
+            单价：<em>12.5元</em>
+            共计：<span>0元</span>
+        </li>
+        <li>
+        <img src="../image/bingfen.png"/>
+            <input type="button" value="-"/>
+            <strong>0</strong>
+            <input type="button" value="+"/>
+            单价：<em>10.5元</em>
+            共计：<span>0元</span>
+        </li>
+        <li>
+        <img src="../image/hot.png"/>
+            <input type="button" value="-"/>
+            <strong>0</strong>
+            <input type="button" value="+"/>
+            单价:<em>8元</em>
+            共计：<span>0元</span>
+        </li>
+        <li>
+        <img src="../image/sale.png"/>
+            <input type="button" value="-"/>
+            <strong>0</strong>
+            <input type="button" value="+"/>
+            单价:<em>6.5元</em>
+            共计:<span>0元</span>
+        </li>
+    </ul>
+    <p>商品共计：0件，合计：0元，其中最贵的商品：0元
+      <img src="../image/shoppingacart.png"/>
+    </p>
+</body>
+</html>

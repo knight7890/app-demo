@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+</head>
+
+<body>
+
+</body>
+<script>
+/*1、构建一个新的数组存放结果
+  2、for循环中每次从原数组中取出一个原素，用这个元素循环与结果数组对比
+  3、若结果数组中没有该元素，则存到数组中
+*/
+Array.prototype.uniqueOne = function(){
+	var res = [this[0]];
+	for(var i = 1; i<this.length; i++){
+		var repeat = false;
+		for(var j = 0 ; j<res.length; j++){
+			if(this[i] == res[j]){
+				repeat = true;
+				break;
+			}
+		}
+		if(!repeat){
+			res.push(this[i]);
+		}
+	}
+	return res;
+}
+/*1、先将原数组进行排序
+  2、检查原数组中的第一个元素，与结果数组中的最后一个元素是否相同，因为已经排序，所以重复元素在相邻位置
+  3、如果不同，则将元素存入结果数组中
+*/
+Array.prototype.uniqueTwo = function(){
+	this.sort();//先排序
+	var res = [this[0]];
+	for(var i = 1; i<this.length;i++){
+		if(this[i]!== res[res.length-1]){
+			res.push(this[i]);
+		}
+	}
+	return res;
+}
+/*
+*/
+var arr = [1,'a','a','b','c','c','d'];
+console.log("第一种方法："  + arr.uniqueOne());
+console.log("第二种方法：" +  arr.uniqueTwo());
+</script>
+</html>

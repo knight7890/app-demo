@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <style type="text/css">
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .ul-tag{
+        width: 100%;
+        margin: 0 auto;
+        height: 40px;
+        border-bottom:1px solid #eee;
+    }
+    .ul-tag .active {
+        background-color:#0097e0;
+        color: #fff;
+    }
+    .ul-tag li{
+        list-style: none;
+        float: left;
+        width: 24%;
+        border-right: 1px solid #eee;
+        line-height: 40px;
+        text-align: center;
+    }
+    .ul-tag .li-hover:hover{
+        color: #1abc9c;
+    }
+    .style-hover{
+        color: #1abc9c ;
+    }
+    .filter-content{
+        width: 100%;
+        position: absolute;
+        top: 40px;
+        left: 0;
+        background: #ffffff;
+        z-index: 99;
+        padding-left: 10px;
+        padding-bottom: 10px;
+        -webkit-transition: all .5s;
+            transition:all .5s;
+        -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+    }
+    .filter-content.in {
+        -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+    }
+    .filter-content ul{
+        width: 60%;
+        font-size:13px;
+        margin-left:100px;
+    }
+    .filter-content li{
+        float: left;
+        height: 40px;
+        line-height: 40px;
+        list-style: none;
+        width: 20%;
+        text-align: center;
+    }
+
+    .div-tag-style{
+        margin: 300px auto;
+        text-align: center;
+    }
+    .div-tag-tag{
+        position: absolute;
+        top: 200px;
+        left: 200px;
+    }
+    .display-block{
+        display: none;
+    }
+    .div-tag-ul .active-tag{
+        border-bottom: 2px solid #0097e0;
+        color: #0097e0;
+    }
+    .position-tag{
+        width: 100%;
+        position: absolute;
+        z-index: 100;
+        background: #fff;
+    }
+    </style>
+<dody>
+    <section>
+        <div class="position-tag">
+            <ul class="ul-tag">
+                <li class="active hover flag" >公司简介</li>
+                <li class="li-hover">出版介绍</li>
+                <li class="li-hover">招聘信息</li>
+                <li class="li-hover">联系我们</li>
+            </ul>
+        </div>
+        <div class="div-tag ">
+                <div class="filter-content in">
+                    <ul class="div-tag-ul">
+                        <li class="active-tag">公司简介</li>
+                        <li>高管团队</li>
+                        <li>产品体系</li>
+                        <li>明星分析师</li>
+                    </ul>
+                </div>
+        </div>
+    </section>
+</body>
+</html>
+<script type="text/javascript">
+window.onload = function(){
+    var oUl = document.querySelector('.ul-tag');
+    var oLi = document.querySelectorAll('.ul-tag li');
+    var oLiTwo = document.querySelectorAll('.div-tag-ul li');
+    var oDivTwo = document.querySelectorAll('.div-tag-tag')
+    var timer = null;
+    for(var i = 0;i<oLi.length;i++){
+        oLi[i].index = i;
+        oLi[i].onclick = function(){
+            if(this.className.indexOf('active')>-1){
+                this.classList.remove('active');
+            }else{
+                clearAllStyle();// 清除所有样式
+                this.classList.add('active');
+            }
+        }
+    }
+    for(var i = 0 ;i<oLiTwo.length;i++){
+        oLiTwo[i].index = i;
+        oLiTwo[i].onclick = function(){
+            if(this.className.indexOf('active-tag')>-1){
+                this.classList.remove('active-tag');
+            }else{
+                clearLiTwoStyle();//清除所有样式
+                this.classList.add('active-tag');
+            }
+        }
+    }
+
+    function clearAllStyle() {
+        for(var i = 0;i<oLi.length;i++){
+            oLi[i].classList.remove('active');
+            oLi[i].classList.remove('hover');
+            document.querySelector('.filter-content').classList.remove('in');
+        }
+    }
+    function clearLiTwoStyle(){
+        for(var i = 0 ;i<oLiTwo.length;i++){
+            oLiTwo[i].classList.remove('active-tag');
+        }
+    }
+
+    document.querySelector('.flag').onmouseover = function(){
+        if(document.querySelector('.flag').className.indexOf('active')<0){
+            document.querySelector('.filter-content').classList.add('in');
+        }
+        document.querySelector('.flag').classList.add('style-hover');
+        clearInterval(timer);
+    }
+    document.querySelector('.flag').onmouseout = function(){
+        timer = setTimeout(function() {
+            if(document.querySelector('.flag').className.indexOf('active')<0){
+                document.querySelector('.filter-content').classList.remove('in');
+            }
+            document.querySelector('.flag').classList.add('style-hover');
+        }, 1500);
+
+    }
+    document.querySelector('.div-tag-ul').onmouseover = function(){
+        clearInterval(timer);
+    }
+    document.querySelector('.div-tag-ul').onmouseover = function(){
+        timer = setTimeout(function() {
+            if(document.querySelector('.flag').className.indexOf('active')<0){
+                document.querySelector('.filter-content').classList.remove('in');
+            }
+            document.querySelector('.flag').classList.add('style-hover');
+        }, 1500);
+    }
+}
+</script>

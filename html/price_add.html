@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+    ul,li,p{padding:0;list-style:none;margin:10px;}
+</style>
+<script>
+    window.onload = function (){
+        var oUl = document.getElementById('list');
+        var oLi = document.querySelectorAll('#list li');
+        var oP = document.querySelector('p');
+        var sTtong = document.querySelectorAll('strong');
+        var eM = document.querySelectorAll('em');
+        var sPan = document.querySelectorAll('span');
+
+        for(var i = 0 ;i<oLi.length;i++){
+            addPrice(oLi[i]);
+        }
+        function sumPrice(){
+            var nums = 0;
+            var prices = 0;
+            for(var i = 0;i<sTtong.length;i++){
+                nums = nums + Number(sTtong[i].textContent);
+                prices += parseFloat(sPan[i].textContent);
+            }
+            oP.innerHTML = "商品共计:"+nums+"件，总价:"+prices+"元。";
+        }
+        function addPrice(oLi){
+            var oIinpt = oLi.querySelectorAll('input');
+            var sTtong = oLi.querySelectorAll('strong')[0];
+            var eM = oLi.querySelectorAll('em')[0];
+            var sPan = oLi.querySelectorAll('span')[0];
+            var num1 = Number(sTtong.textContent);
+            var num2 = parseFloat(eM.textContent);
+
+            // 点击商品减数
+            oIinpt[0].onclick = function (){
+                num1--;
+                if(num1<0){
+                    num1 = 0; //不需要二个或三个等于号之类的
+                }
+                sTtong.textContent = num1;
+                sPan.textContent = num1*num2;
+                sumPrice();
+            }
+
+
+            // 点击商品加数
+            oIinpt[1].onclick = function (){
+                num1++;
+                sTtong.textContent = num1;
+                sPan.textContent = num1*num2;
+                sumPrice();
+            }
+        }
+    };
+</script>
+</head>
+<body>
+    <ul id="list">
+        <li>
+        <img src="../image/B.png"/>
+            <input type="button" value="-"/>
+            <strong>0</strong>
+            <input type="button" value="+"/>
+            单价：<em>12.5元</em>
+            共计：<span>0元</span>
+        </li>
+        <li>
+        <img src="../image/bingfen.png"/>
+            <input type="button" value="-"/>
+            <strong>0</strong>
+            <input type="button" value="+"/>
+            单价：<em>10.5元</em>
+            共计：<span>0元</span>
+        </li>
+        <li>
+        <img src="../image/hot.png"/>
+            <input type="button" value="-"/>
+            <strong>0</strong>
+            <input type="button" value="+"/>
+            单价:<em>8元</em>
+            共计：<span>0元</span>
+        </li>
+        <li>
+        <img src="../image/sale.png"/>
+            <input type="button" value="-"/>
+            <strong>0</strong>
+            <input type="button" value="+"/>
+            单价:<em>6.5元</em>
+            共计:<span>0元</span>
+        </li>
+    </ul>
+    <p style="margin-top:30px;margin-left:30px">
+        商品共计：0件，合计：0元
+    </p>
+</body>
+</html>

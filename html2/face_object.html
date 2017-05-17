@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+</head>
+<style type="text/css">
+	.parent-style{
+		position: relative;
+	}
+	.left-style{
+		border: 1px solid red;
+		width: 49%;
+		position: absolute;
+		height: 600px;
+	}
+	.right-style{
+		border: 1px solid green;
+		width: 49%;
+		position: absolute;
+		height: 600px;
+	}
+
+</style>
+<body>
+<div class="parent-style">
+  	<div class="box-style">
+  		<img src="">
+  	</div>
+  	<div class="box-style">
+  		<img src="">
+  	</div>
+ </div>
+</body>
+<script>
+window.onload = function (){
+
+}
+function waterfall(parent,box){
+      var oParent=document.querySelector(".parent-style");
+      var leftWidth = document.querySelectorAll(".box-style")
+      var oBoxW=oBoxs[0].offsetWidth;//计算每个box的宽度
+      //计算整个页面显示的列数（页面宽/box的宽）
+      var cols=Math.floor(document.documentElement.clientWidth/oBoxW);
+      //设置main的宽,居中
+      oParent.style.cssText='width:'+oBoxW*cols+'px;margin:0 auto;';
+      var hArr=[];//存放每一列高度的数组
+      for(var i=0;i<oBoxs.length;i++){
+        if(i<cols){
+          hArr.push(oBoxs[i].offsetHeight);//将第一行的各个高度加到数组中
+        }else{
+          var minH=Math.min.apply(null,hArr);//apply方法可以改变数组的指向,因为Math.min方法不支持数组
+          var index=getMinhIndex(hArr,minH);
+          oBoxs[i].style.position='absolute';
+          oBoxs[i].style.top=minH+'px';
+          oBoxs[i].style.left=oBoxs[index].offsetLeft+'px';
+          hArr[index]+=oBoxs[i].offsetHeight;
+        }
+      }
+    }
+</script>
+</html>

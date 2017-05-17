@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+    <style type="text/css">
+    .aui-content.search {
+        background: #ffffff;
+        overflow: hidden;
+    }
+    .aui-content.search {
+        padding: 10px 0;
+        margin-bottom: 0;
+    }
+    .searchlist {
+        font-size: 12px;
+        color: #666;
+        border-right: 1px solid #eee;
+    }
+    .searchlist:last-child {
+        border-right: 0px;
+    }
+    .searchlist .aui-iconfont {
+        color: #ccc;
+    }
+    #search-classify {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100;
+    }
+    .aui-content > .aui-list-view:last-child {
+        margin-bottom: 0;
+    }
+    .hotel-list::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+        visibility: hidden;
+    }
+    .search-show {
+        width: 100%;
+        position: fixed;
+        top: 44px;
+        left: 0;
+        background: #ffffff;
+        padding: 15px;
+        z-index: 99;
+        -webkit-transition: all .5s;
+            transition:all .5s;
+        -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+    }
+    .search-show.in {
+        -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+    }
+    button, .aui-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+        color: #666666;
+        margin-bottom: 5px;
+    }
+    .mark {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 98;
+    }
+    .aui-btn.active {
+        border: 1px solid #1abc9c;
+    }
+    .aui-btn:active {
+        background-color: #ffffff;
+        color: #666666;
+    }
+    .headerA{
+    	background-color:blue;
+    	width:100%;
+    	height: 2.5rem;
+    	color:#fff;
+    }
+    </style>
+</body>
+    <section class="aui-content search" id="search-classify">
+        <div class="aui-col-xs-6 aui-text-center searchlist" data-tag="classify">分类 <i class="aui-iconfont aui-icon-down"></i></div>
+        <div class="aui-col-xs-6 aui-text-center searchlist" data-tag="orderlist">排序 <i class="aui-iconfont aui-icon-down"></i></div>
+    </section>
+    <div class="search-show" id="classify">
+        <div class="aui-btn aui-btn-outlined active" tapmode data-type="1">推荐</div>
+        <div class="aui-btn aui-btn-outlined" tapmode data-type="2">推荐</div>
+        <div class="aui-btn aui-btn-outlined" tapmode data-type="3">推荐</div>
+        <div class="aui-btn aui-btn-outlined" tapmode data-type="4">推荐</div>
+        <div class="aui-btn aui-btn-outlined" tapmode data-type="5">推荐</div>
+        <div class="aui-btn aui-btn-outlined" tapmode data-type="6">推荐</div>
+    </div>
+    <div class="search-show" id="orderlist">
+        <div class="aui-btn aui-btn-outlined" tapmode>距离我最近</div>
+        <div class="aui-btn aui-btn-outlined" tapmode>销量由高到低</div>
+        <div class="aui-btn aui-btn-outlined" tapmode>销量由低到高</div>
+        <div class="aui-btn aui-btn-outlined" tapmode>价格由高到低</div>
+        <div class="aui-btn aui-btn-outlined" tapmode>价格由低到高</div>
+    </div>
+</html>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    var delay = 0;
+    apiready = function () {
+        api.parseTapmode();
+        if(api.systemType != 'ios'){
+            delay = 300;
+        }
+    }
+
+    var searchList = document.querySelectorAll("#search-classify > div");
+    for (var i = 0; i < searchList.length; i++) {
+        searchList[i].onclick = function(){
+            if(document.querySelector(".search-show.in")){
+                document.querySelector(".search-show.in").classList.remove("in");
+            }
+            document.getElementById(""+this.getAttribute("data-tag")+"").classList.add("in");
+            if(!document.querySelector(".mark")){
+                document.querySelector("body").insertAdjacentHTML("beforeend", '<div class="mark"></div>');
+            }
+            removeMark();
+            document.querySelector(".search-show.in").addEventListener('touchmove', function(event){
+                event.preventDefault();
+            },false)
+        }
+    }
+    // removeMark();
+    function removeMark(){
+        document.querySelector(".mark").addEventListener('touchstart', function(event){
+            event.preventDefault();
+            closeScreen();
+        },false)
+    }
+    function closeScreen(){
+        if(document.querySelector(".search-show.in")){
+            document.querySelector(".search-show.in").classList.remove("in");
+        }
+        if(document.querySelector(".mark"))document.querySelector(".mark").parentNode.removeChild(document.querySelector(".mark"));
+    }
+    var classifyListBtn = document.querySelectorAll("#classify .aui-btn");
+    for (var i = 0; i < classifyListBtn.length; i++) {
+        classifyListBtn[i].onclick = function(){
+            if(document.querySelector("#classify .aui-btn.active")){
+                document.querySelector("#classify .aui-btn.active").classList.remove("active");
+            }
+            this.classList.add("active");
+            closeScreen();
+            // 获取当前标签的值，执行ajax
+        }
+    }
+    var orderListBtn = document.querySelectorAll("#orderlist .aui-btn");
+    for (var i = 0; i < orderListBtn.length; i++) {
+        orderListBtn[i].onclick = function(){
+            if(document.querySelector("#orderlist .aui-btn.active")){
+                document.querySelector("#orderlist .aui-btn.active").classList.remove("active");
+            }
+            this.classList.add("active");
+            closeScreen();
+            // 获取当前标签的值，执行ajax
+        }
+    }
+</script>

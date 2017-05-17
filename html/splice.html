@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+	<link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+
+	<style type="text/css">
+		input[type="text"]{
+			border: 1px solid gray;
+			width: 200px;
+			height: 40px;
+			margin-left:100px;
+			text-indent: 20px;
+		}
+		.select{
+			position: absolute;
+			top:10px;
+			left:250px;
+			border: 1px solid red;
+			padding:4px 8px;
+			z-index: 5;
+		}
+		ul{
+			margin-left:100px;
+			border: 1px solid gray;
+			width: 200px;
+		}
+		ul li{
+			text-align: center;
+			border-bottom:1px solid gray;
+		}
+		.hideen{
+			display: none;
+		}
+		.blue{
+			background-color:blue;
+		}
+	</style>
+</head>
+<body>
+	<section>
+	    <div style="position:absolute;top:250px;left:100px">你选中的国家是:<span class="country" style="margin-left:20px"></span></div>
+	 	<input type="text" name="" value="全部国家" readonly>
+	 	<div class="select" onclick="selectOn()">V</div>
+	 	<ul class="hideen">
+	 		<li>全部国家</li>
+	 		<li>中国</li>
+	 		<li>美国</li>
+	 		<li>加拿大</li>
+	 		<li>澳大利亚</li>
+	 	</ul>
+	</section>
+</body>
+<script type="text/javascript">
+  function selectOn(){
+  	var oUl = document.querySelector('ul');
+  	 if(oUl.className.indexOf('hideen')>-1){
+  	 	 oUl.classList.remove('hideen');
+  	 }else{
+  	 	 oUl.classList.add('hideen');
+  	 }
+  }
+  var liTabs = document.querySelectorAll('ul > li');
+  for(var i = 0;i<liTabs.length;i++){
+	  liTabs[i].onclick = function(){
+	  	var inputVal = document.querySelector('input').value;
+	  	var country = document.querySelector('.country').value;
+	  		if(this.className.indexOf('blue')>-1){
+	  			this.classList.remove('blue');
+	  		}else{
+	  			clearBlue()//清除样式
+	  			this.classList.add('blue');
+	  			inputVal = this.textContent; //选中的值赋值给input标签
+	  			country = inputVal; // 选中的值赋值给span标签
+	  			document.querySelector('input').value = inputVal;
+	  			document.querySelector('.country').textContent = country ;
+	  		}
+	  }
+  }
+  function clearBlue(){//清除蓝色和隐藏
+  	 var liTabs = document.querySelectorAll('ul>li');
+  	 document.querySelector('ul').classList.add('hideen');
+  	 for(var i = 0;i<liTabs.length;i++){
+  	 	 liTabs[i].classList.remove('blue');
+  	 }
+  }
+</script>
+</html>

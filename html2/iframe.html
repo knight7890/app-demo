@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+</head>
+<style>
+</style>
+
+<body>
+    <ul>
+    	<li name="a">a</li>
+    	<li name="b">b</li>
+    	<li name="c">c</li>
+    	<li name="d">d</li>
+    </ul>
+    <ul>
+    	<li name="e">e</li>
+    	<li name="b">f</li>
+    	<li name="g">g</li>
+    	<li name="h">h</li>
+    </ul>
+    <ul>
+    	<li name="i">i</li>
+    	<li name="j">j</li>
+    	<li name="ck">k</li>
+    	<li name="ds">l</li>
+    </ul>
+    <table class="user-data" >
+        <tr>
+            <th>用户编号</th>
+            <th>用户昵称</th>
+            <th>姓名</th>
+            <th>手机号</th>
+            <th>性别</th>
+        </tr>
+        <tr class = "userId">
+            <td id="partyId" name="partyId">1001</td>
+            <td><input type="text"  name="nickName" value="好人"></td>
+            <td><input type="text"  name="userName" value="34"></td>
+            <td><input type="text"  name="mobilePhone" value="18458659386"></td>
+            <td   >
+                <select class="gender" name = "sex">
+                    <option>男</option>
+                    <option>女</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+</body>
+ <script type="text/javascript">
+     var userId = document.querySelectorAll('.userId');
+     var userList = [];
+
+     for(var i = 0;i<userId.length;i++){
+        var userJson = {};
+        var inputItem = userId[i].querySelectorAll('input[name]');
+        var tdItem = document.getElementById('partyId');
+        var genderId = document.querySelector('.gender')
+        console.log('gender的长度：' + genderId.innerHTML);
+        console.warn(tdItem.innerText);
+        console.info(inputItem.length);
+        userJson[''+tdItem.getAttribute('name')+''] = tdItem.textContent;
+        for(var j= 0;j<inputItem.length;j++){
+            userJson[''+inputItem[j].name+''] = inputItem[j].value;
+        }
+        var index = genderId.selectedIndex;
+        userJson[''+genderId.getAttribute('name')+''] = genderId.options[index].textContent;
+        userList.push(userJson);
+     }
+
+     console.log(JSON.stringify(userList));
+ </script>
+<script>
+  var arr = [];
+
+  // var uls  = document.querySelectorAll('ul');
+  // for(var i =0;i<uls.length;i++){
+  //   var lis = uls[i].querySelectorAll('li');
+  //   for(var k = 0;k<lis.length;k++){
+  //     var name = lis[k].getAttribute('name');
+  //     var text = lis[k].innerText;
+  //     jsons[''+ name+''] =text;
+  //   }
+  //   arr.push(jsons);
+  // }
+
+var uls=document.querySelectorAll("ul");
+for(var i=0;i<uls.length;i++){
+    var jsons = {};
+	var lis=uls[i].querySelectorAll("li");
+	for(var j=0;j<lis.length;j++){
+		var name=lis[j].getAttribute("name");
+		var text=lis[j].innerText;
+		jsons["" +name+ ""]=text;
+	}
+    arr.push(jsons);
+}
+
+console.log(JSON.stringify(arr));
+//  可以在li 标签中加class获取它的值 怎么动态把 li标签里面的vule值 拼接到数组里面，拼接的形式就是数组里面注销的格式
+</script>
+</html>

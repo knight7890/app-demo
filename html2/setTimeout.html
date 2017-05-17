@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../css/swiper.min.css" />
+</head>
+<style>
+#qq { width:200px; height:400px; background:#F9C; }
+#title { width:240px; height:180px; background:#FC6; position:absolute; top:10px; left:220px; display:none; }
+</style>
+
+<body>
+    <!-- <div id="qq"></div>
+    <div id="title"></div> -->
+
+    <div>
+        <ul id="oUl">
+            <li>张三</li>
+            <li>李四</li>
+            <li>王五</li>
+            <li>赵六</li>
+        </ul>
+        <button id="delete" >删除</button>
+        <button id="add">增加</button>
+    <div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/swiper.min.js"></script>
+<script>
+window.onload = function(){
+    var oUl = document.getElementById('oUl');
+    var oLi = document.querySelectorAll('li');
+    var arr = ['范冰冰','李晨','邓超','孙俪','黄晓明','angelababy','帅锅','美女','野兽','走你'];
+     document.getElementById('delete').onclick = function(){
+        if(oUl.children[0]){
+            oUl.removeChild(oUl.children[0])
+        }
+        return;
+     }
+     document.getElementById('add').onclick = function(){
+        var aLi = document.createElement('li');
+        if(!oUl.children[0]){
+            aLi.textContent =  " "+ arr[0] +" " ;
+        }else if(oUl.children.length<arr.length){
+            aLi.textContent =  " "+ arr[oUl.children.length] +" " ;
+        }else{
+            return;
+        }
+        oUl.appendChild(aLi);
+     }
+
+
+    // var qq = document.getElementById('qq');
+    // var title = document.querySelector('#title');
+    // var timer = null;
+    // qq.onmouseover = show;
+    // qq.onmouseout = hide;
+
+    // title.onmouseover = show;
+    // title.onmouseout = hide;
+
+    // function show (){
+    //     clearInterval(timer);
+    //     title.style.display = 'block';
+    // }
+    // function hide (){
+    //     timer = setTimeout(function(){
+    //         title.style.display = 'none';
+    //     },500)
+    // }
+}
+
+
+</script>
+</html>

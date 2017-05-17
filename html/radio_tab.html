@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <style>
+        body{
+            background-color: #fff;
+            position: relative;
+        }
+         .aui-bar-nav {
+            top: 0;
+            line-height: 2.25rem;
+            background-color: #cd3c3c;
+            color: #ffffff;
+        }
+       .mr-t-10{
+        width: 80%;
+        background: #eee;
+       }
+       .aui-list-item-arrow:before{
+            border:none;
+       }
+       .default-radio:checked, .aui-radio.aui-checked, .aui-checkbox:checked, .aui-checkbox.aui-checked {
+            background-color: #cd3c3c;
+            border: solid 1px #CD3C3C;
+
+            text-align: center;
+            background-clip: padding-box;
+        }
+        .aui-radio, .aui-checkbox{
+            border: 1px solid #000;
+            width: 1rem;
+            height: 1rem
+        }
+        .add-new-car{
+            width: 90%;
+            position: fixed;
+            bottom: 1.25rem;
+            left: 5%;
+        }
+        .add-new-car>div{
+            background: #CD3C3C!important;
+        }
+        .back-eee{
+            background:#eee!important;
+        }
+        .set-default{
+            margin-right:1.5rem;
+        }
+        .radio-text{
+            /*display:block;*/
+            width:2.5rem;
+            color:#000000;
+            padding:0.2rem 0
+        }
+        .no-padded{
+            padding-right:0!important;
+        }
+       .imporve-a{
+            color: #cd3c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="aui-content">
+        <ul class="aui-list aui-media-list">
+            <li class="aui-list-item aui-list-item-middle back-eee">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-media">
+                        <img src="../../../image/mine_info/bmw.png" class="aui-img-round aui-list-img-sm" style="width: 2.5rem;height: 2.5rem;margin-left: 0.5rem;">
+                    </div>
+                   <div class="aui-list-item-inner aui-list-item-arrow no-padded">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title aui-font-size-14" >一汽大众奥迪A3</div>
+                       </div>
+                        <div class="aui-list-item-text" style="color: #000">
+                            行驶里程0Km
+                        </div>
+                     </div>
+                     <div class="aui-list-item-right set-default aui-text-center aui-padded-t-10">
+                         <input type="radio" class="aui-radio default-radio" checked name="defaut">
+                         <span  class="radio-text aui-text-center">默认车辆</span>
+                     </div>
+                    <div class="aui-list-item-right set-default aui-text-center aui-hide">
+                         <a class="imporve-a aui-font-size-16 radio-text " tapmode onclick="">去完善</a>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item aui-list-item-middle back-eee">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-media">
+                        <img src="../../../image/mine_info/bmw.png" class="aui-img-round aui-list-img-sm" style="width: 2.5rem;height: 2.5rem;margin-left: 0.5rem;">
+                    </div>
+                   <div class="aui-list-item-inner aui-list-item-arrow  no-padded">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title aui-font-size-14">一汽大众奥迪A3</div>
+                       </div>
+                        <div class="aui-list-item-text" style="color: #000">
+                            行驶里程0Km
+                        </div>
+                     </div>
+                     <div class="aui-list-item-right set-default aui-text-center aui-padded-t-10" tapmode>
+                         <input type="radio" class="aui-radio default-radio" name="defaut">
+                         <span class="radio-text aui-text-center">设为默认</span>
+                     </div>
+                    <div class="aui-list-item-right set-default aui-text-center aui-hide" tapmode>
+                         <a class="imporve-a aui-font-size-16 radio-text" tapmode onclick="">去完善</a>
+                    </div>
+                 </div>
+            </li>
+            <li class="aui-list-item aui-list-item-middle back-eee">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-media">
+                        <img src="../../../image/mine_info/bmw.png" class="aui-img-round aui-list-img-sm" style="width: 2.5rem;height: 2.5rem;margin-left: 0.5rem;">
+                    </div>
+                   <div class="aui-list-item-inner aui-list-item-arrow  no-padded">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title aui-font-size-14">一汽大众奥迪A3</div>
+                       </div>
+                        <div class="aui-list-item-text" style="color: #000">
+                            行驶里程0Km
+                        </div>
+                     </div>
+                     <div class="aui-list-item-right set-default aui-text-center aui-padded-t-10" tapmode>
+                         <input type="radio" class="aui-radio default-radio" name="defaut">
+                         <span class="radio-text aui-text-center">设为默认</span>
+                     </div>
+                    <div class="aui-list-item-right set-default aui-text-center aui-hide" tapmode>
+                         <a class="imporve-a aui-font-size-16 radio-text" tapmode onclick="">去完善</a>
+                    </div>
+                 </div>
+            </li>
+        </ul>
+    </div>
+    <div class="add-new-car"><div class="aui-btn aui-btn-danger aui-btn-block" >添加新车辆</div></div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+    };
+
+    //增加点击
+    var inputClick = document.querySelectorAll('input');
+        for(var i = 0 ;i<inputClick.length; i++){
+            inputClick[i].onclick = function(){
+                changeRadio();
+            }
+        }
+    // 单选按钮点击选中
+    function changeRadio(){
+        var carRadios = document.querySelectorAll('input[type="radio"]');
+        for(var i = 0; i<carRadios.length; i++){
+            carRadios[i].addEventListener('change', function() {
+                if(this.checked) {
+                    resetRadioText(); // 重置按钮内容
+                    this.parentNode.children[1].textContent = '默认车辆';
+                }
+            })
+        }
+    }
+    // 重置单选按钮内容
+    function resetRadioText() {
+        var carRadios = document.querySelectorAll('input[type="radio"]');
+        for(var i = 0; i<carRadios.length; i++){
+            carRadios[i].parentNode.children[1].textContent = '设为默认';
+        }
+    }
+    // 切换按钮内容
+    function changeContent() {
+        var setDefault = document.querySelectorAll('.set-default');
+        for(var i = 0; i<setDefault.length; i++) {
+            if(setDefault[i].className.indexOf('aui-hide') > -1) {
+                setDefault[i].classList.remove('aui-hide');
+            } else {
+                setDefault[i].classList.add('aui-hide');
+            }
+        }
+    }
+</script>
+</html>

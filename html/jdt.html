@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+	<style type="text/css">
+		body {
+			background-color: #ffffff;
+		}
+		.progress {
+			position: relative;
+			top: 0;
+			left: 0;
+			height: 6.5rem;
+			width: 6.5rem;
+		}
+		.progress div {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 6.5rem;
+			width: 6.5rem;
+			border: 16.25px solid transparent;
+			border-radius: 50%;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+		.progress .progress-left, .progress .progress-right, .progress .progress-cover {
+		  	clip: rect(0 3.25rem 6.5rem 0);
+		  /* rect( [0 | <width/2> | <height> | 0] ) */
+		}
+		.progress .progress-left,
+		.progress .progress-right {
+			border-color: #6ec84e;
+		}
+		.progress .progress-track,
+		.progress .progress-cover {
+			opacity: 1;
+			border-color: #f0f0f0;
+		}
+		.progress .progress-right {
+			opacity: 0;
+			-webkit-transform: rotate(180deg);
+			transform: rotate(180deg);
+		}
+		.progress .progress-text {
+			border: none;
+			text-align: center;
+			color: #949494;
+			line-height: 6.5rem;
+		}
+
+	</style>
+</head>
+<body>
+    <div class="progress" data-precent="20"></div>
+    <div class="progress" data-precent="1"></div>
+    <div class="progress" data-precent="100"></div>
+    <div class="progress" data-precent="50"></div>
+</body>
+<script type="text/javascript">
+    var progress = document.querySelectorAll(".progress");
+    if(progress.length){
+    	for(var i = 0; i<progress.length; i++){
+    		var precent = parseInt(progress[i].getAttribute("data-precent"));
+    		var progressLeftStyle = 'transform: rotate(' + precent * 3.6 + 'deg);-webkit-transform: rotate(' + precent * 3.6 + 'deg);';
+    		if (precent > 50) {
+    			var progressRightStyle = 'opacity:1;';
+    			var progressCoverStyle = 'opacity:0;';
+    		}else{
+    			var progressRightStyle = 'opacity:0;';
+    			var progressCoverStyle = 'opacity:1;';
+    		}
+    		var progressHtml = '<div class="progress-track"></div>'+
+    					'<div class="progress-left" style="'+progressLeftStyle+'"></div>'+
+    					'<div class="progress-right" style="'+progressRightStyle+'"></div>'+
+    					'<div class="progress-cover" style="'+progressCoverStyle+'"></div>'+
+    					'<div class="progress-text">'+
+    					'<span class="progress-num">' + precent +'</span>'+
+    					'<span class="progress-percent">%</span>'+
+    					'</div>';
+    		progress[i].insertAdjacentHTML('beforeend', progressHtml);
+    	}
+    }
+</script>
+</html>

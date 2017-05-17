@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <style>
+        body{
+
+        }
+    </style>
+</head>
+<body>
+ <!-- 评分 -->
+<section class="aui-padded-l-15">
+    <div class="aui-info bg-ffffff">
+      <div class="aui-info-item aui-font-size-18">评分
+        <i data-id="1" class="aui-iconfont aui-icon-star aui-margin-l-15 aui-font-size-18"></i>
+        <i data-id="2" class="aui-iconfont aui-icon-star aui-margin-l-15 aui-font-size-18"></i>
+        <i data-id="3" class="aui-iconfont aui-icon-star aui-margin-l-15 aui-font-size-18"></i>
+        <i data-id="4" class="aui-iconfont aui-icon-star aui-margin-l-15 aui-font-size-18"></i>
+        <i data-id="5" class="aui-iconfont aui-icon-star aui-margin-l-15 aui-font-size-18"></i>
+      </div>
+    </div>
+</section>
+
+<section class="bg-ffffff aui-padded-l-15 aui-padded-r-15">
+  <textarea placeholder="反馈您的服务体验，帮助我们更好的完善。" rows="5"></textarea>
+</section>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/doT.min.js"></script>
+<script type="text/javascript">
+  apiready = function(){
+  };
+  var scores = document.querySelectorAll('.aui-info-item i');
+  // console.log(scores.length);
+  for(var i =0;i<scores.length;i++){
+    scores[i].onclick = function(){
+      var dataId =this.getAttribute('data-id');
+      activeStars(dataId);
+    }
+  }
+
+  // 选中小于该星级的元素
+    function activeStars(index) {
+      var scores = document.querySelectorAll('.aui-info-item i');
+      for(var i = 0; i<scores.length; i++){
+          if(i <= parseInt(index-1)) {
+          scores[i].classList.add('star-active');
+        } else if(i > parseInt(index-1)) {
+          scores[i].classList.remove('star-active');
+        }
+      }
+
+    }
+</script>
+</html>

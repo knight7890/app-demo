@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<script>
+
+    // returm 返回值
+    // 数值、字符串、布尔、函数、对象、为定义
+
+    // f1(); =>100
+
+    window.onload = function (){
+        //alert(typeof f1())
+        // f1()(10);
+        // function f1(){
+        //     return functionf2(a){
+        //         alert(a);
+        //     }
+        // }
+    }
+    //alert(fn2(5))  //1 2 3 4 5
+    fn2(7)  // 1 2 3 4 5 6 7
+    function fn2 (n){
+        var arr = [];
+        for(var i= 1;i<=n;i++){
+            arr.push(i)
+        }
+        return arr;
+    }
+    /*
+    return : 返回值
+        1） 函数名 ＋ 括号：  fn1() === >return 后面的值
+        2） 所有函数默认返回值：未定一
+        3） return 后面的任何代码都不执行
+    */
+
+    //fn1(1,2,3); // 实参数  －－实际传递的参数
+
+    function fn1(){
+        // arguments => [1,2,3] 实参的集合
+    }
+
+    // 当函数的参数个数无法确定的时候： 用arguments
+    console.log(sum(1,2,3));
+    console.log(sum(1,2,3,4));
+    function sum (){
+        var n = 0;
+        for(var i = 0;i<arguments.length;i++){
+            n += arguments[i];
+        }
+        return n;
+    }
+</script>
+<div id="btn">免费获取验证码 </div>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

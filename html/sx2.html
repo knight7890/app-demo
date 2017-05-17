@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+    <style type="text/css">
+    .filter-item {
+        font-size: 0.6rem;
+        color: #666;
+        border-right: 1px solid #eee;
+    }
+    .filter-item:last-child {
+        border-right: 0px;
+    }
+    #filter {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        background: #ffffff;
+        overflow: hidden;
+        padding: 0.5rem 0;
+        margin-bottom: 0;
+    }
+    .filter-content {
+        width: 100%;
+        position: fixed;
+        top: 2rem;
+        left: 0;
+        background: #ffffff;
+        z-index: 99;
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
+        padding-bottom: 0.75rem;
+        -webkit-transition: all .5s;
+            transition:all .5s;
+        -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+    }
+    .filter-content.in {
+        -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+    }
+    .txet-a-center {
+        margin-bottom: 0.25rem;
+    }
+
+    .txet-a-center:active {
+        background-color: #ffffff;
+        color: #1abc9c;
+    }
+    .txet-a-center{
+        height: 1.6rem !;
+        line-height: 1.6rem;
+        font-size: 0.7rem;
+    }
+    </style>
+</body>
+    <section class="aui-content aui-border-b" id="filter">
+        <div class="aui-row">
+            <div class="aui-col-xs-6 aui-text-center filter-item" data-tag="classify">分类 <i class="aui-iconfont  aui-icon-down " data-id = "1"></i></div>
+            <div class="aui-col-xs-6 aui-text-center filter-item" data-tag="orderlist">排序 <i class="aui-iconfont aui-icon-down"></i></div>
+        </div>
+    </section>
+    <div class="filter-content" id="classify">
+        <div class="txet-a-center aui-border-b active" tapmode data-type="1">推荐</div>
+        <div class="txet-a-center aui-border-b" tapmode data-type="2">推荐</div>
+        <div class="txet-a-center aui-border-b" tapmode data-type="3">推荐</div>
+        <div class="txet-a-center aui-border-b" tapmode data-type="4">推荐</div>
+        <div class="txet-a-center aui-border-b" tapmode data-type="5">推荐</div>
+        <div class="txet-a-center aui-border-b" tapmode data-type="6">推荐</div>
+    </div>
+    <div class="filter-content" id="orderlist">
+        <div class="txet-a-center aui-border-b" tapmode>距离我最近</div>
+        <div class="txet-a-center aui-border-b" tapmode>销量由高到低</div>
+        <div class="txet-a-center aui-border-b" tapmode>销量由低到高</div>
+        <div class="txet-a-center aui-border-b" tapmode>价格由高到低</div>
+        <div class="txet-a-center aui-border-b" tapmode>价格由低到高</div>
+    </div>
+    <section>
+
+    </section>
+</html>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    // 获取全部筛选项
+    var filterList = document.querySelectorAll(".filter-item");
+    for (var i = 0; i < filterList.length; i++) {
+        filterList[i].onclick = function(){
+            // 判断当前是否已经展开
+            if(this.className.indexOf("open") > -1){
+                this.classList.remove("open");
+                closeFilter();
+                return;
+            }
+            // 移除显示的选内容
+            closeFilter();
+            // 给当前添加open，标明为已经打开
+            this.classList.add("open");
+            // 根据data-tag显示指定筛选内容
+            document.getElementById(""+this.getAttribute("data-tag")+"").classList.add("in");
+            // 判断下是否有遮罩层，如果没有往body中插入一个
+            if(!document.querySelector(".aui-mask")){
+                document.querySelector("body").insertAdjacentHTML("beforeend", '<div class="aui-mask aui-mask-in"></div>');
+            }
+            // 显示后监听mark的touchstar事件
+            markListenerRemove();
+            document.querySelector(".filter-content.in").addEventListener('touchmove', function(event){
+                event.preventDefault();
+            },false)
+        }
+    }
+
+    // 监听触摸事件，关闭
+    function markListenerRemove(){
+        document.querySelector(".aui-mask").addEventListener('touchstart', function(event){
+            event.preventDefault();
+            closeFilter();
+        },false)
+    }
+    // 关闭方法
+    function closeFilter(){
+        if(document.querySelector(".filter-item.open")){
+            document.querySelector(".filter-item.open").classList.remove("open");
+        }
+        if(document.querySelector(".filter-content.in")){
+            document.querySelector(".filter-content.in").classList.remove("in");
+        }
+        if(document.querySelector(".aui-mask")){
+            document.querySelector(".aui-mask").parentNode.removeChild(document.querySelector(".aui-mask"));
+        }
+    }
+    var classifyListBtn = document.querySelectorAll("#classify .txet-a-center");
+    for (var i = 0; i < classifyListBtn.length; i++) {
+        classifyListBtn[i].onclick = function(){
+            if(document.querySelector("#classify .txet-a-center.active")){
+                document.querySelector("#classify .txet-a-center.active").classList.remove("active");
+            }
+            this.classList.add("active");
+            closeFilter();
+            // 获取当前标签的值，执行ajax
+        }
+    }
+    var orderListBtn = document.querySelectorAll("#orderlist .txet-a-center");
+    for (var i = 0; i < orderListBtn.length; i++) {
+        orderListBtn[i].onclick = function(){
+            if(document.querySelector("#orderlist .txet-a-center.active")){
+                document.querySelector("#orderlist .txet-a-center.active").classList.remove("active");
+            }
+            this.classList.add("active");
+            closeFilter();
+            // 获取当前标签的值，执行ajax
+        }
+    }
+</script>

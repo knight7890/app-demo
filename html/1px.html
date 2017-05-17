@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>json arr</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+	<style type="text/css">
+	</style>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    function Person(name,age){
+        this.name=name;
+        this.age=age;
+    }
+    Person.prototype.sayHello=function(){
+        alert("原型得到Name："+this.name);
+    }
+    var per=new Person("AAA",21);
+    per.sayHello();
+
+
+    function Student(){}
+    Student.prototype=new Person("HOGNDNA",21);
+    var stu=new Student();
+    Student.prototype.grade=5;
+    Student.prototype.intr=function(){
+        alert(this.grade);
+    }
+    stu.sayHello();
+
+
+var arr = ["1","2","3","4","5","6","7","8"];//声明一个JS数组
+    // arr.push({
+    //     a:"1",
+    //     b:"2"
+    // })
+    // arr.push('0');
+
+    // arr.push('1');
+
+    // arr.push('2');
+    arr.splice(4,2)
+console.log(JSON.stringify(arr));//这里后台数据就到前台了，可以用JS代码遍历arr了
+// var len = arr.length;
+// for(var i=0;i<len;i++){
+//     console.log(arr[i]);
+// }
+
+ /*
+setAttribute();
+getAttribute();
+addEeventListener();
+document.querySelector();
+document.querySelectorAll();
+document.getElementById('data-id'+dataId+'');
+document.getElementById('img[data-id="'+dataId+'"]').src="../../demo.png"
+
+ */
+</script>
+</html>

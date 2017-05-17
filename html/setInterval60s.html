@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<script>
+    window.onload = function (){
+        var times = 60;
+        var oBtn = document.getElementById('btn');
+        function time(){
+            if(times == 0){
+                //oBtn.removeAttribute('dataId');
+                oBtn.textContent = "免费重新获取";
+                times = 60;
+            }else{
+                //oBtn.setAttribute('dataId',0);
+                oBtn.textContent = ""+ times +"后重新发送";
+                times--;
+                setTimeout(function(){
+                    time();
+                },1000);
+            }
+        };
+
+        oBtn.onclick = function(){
+            time();
+        };
+    }
+</script>
+<div id="btn">免费获取验证码 </div>
+<script type="text/javascript">
+//var wait=60;
+// function time(o) {
+//         if (wait == 0) {
+//             o.removeAttribute("disabled");
+//             o.textContent="免费获取验证码";
+//             wait = 60;
+//         } else {
+//             o.setAttribute("disabled", true);
+//             o.textContent="重新发送(" + wait + ")";
+//             o.innerHTML = "<span>"+ wait +"</span>s后"
+//             wait--;
+//             setTimeout(function() {
+//                 time(o)
+//             },
+//             1000)
+//         }
+//     }
+// document.getElementById("btn").onclick=function(){
+//     time(this);
+// }
+</script>
+</body>
+</html>

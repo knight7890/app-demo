@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+
+    	#borderTag div {
+	        border: 1px solid red;
+    	}
+    	#borderTag .active{
+    		border: 2px solid blue;
+    	}
+        .user {
+            width : 256px ;
+            height : 200px ;
+        }
+
+    </style>
+</head>
+<body>
+	<div id="borderTag">
+		<div class="active lengthTag">上城区</div>
+		<div class="lengthTag">西湖区</div>
+		<div class="lengthTag">余杭区</div>
+		<div class="lengthTag">拱墅区</div>
+	</div>
+    <!-- 另外一种例子 data-id -->
+    <div id = "user" data-uid = "12345" data-uname = "脚本之家" > </div>
+
+    <!-- 看css -->
+    <div class = "user" data-id = "123" data-name = "feiwen" > 1 </div>
+    <div class = "user" data-id = "124" data-name = "css" > 码头 </div>
+
+     <!-- document.getElementById("text"+i) 拼接参数的用法-->
+     <input id="TxtNUmber" type="text" /> <input id="btn" type="button"  onclick="pp()" />
+    <br/>
+    <br/>
+     <input id="Text1" type="text" value="1" />
+     <input id="Text2" type="text" />
+     <input id="Text3" type="text" />
+     <input id="Text4" type="text" />
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+	 var lengthTag = document.getElementsByClassName("lengthTag");
+	  for(var i=0;i<lengthTag.length;i++){
+            lengthTag[i].onclick = function(){
+                this.classList.toggle("active")
+//              if(this.className.indexOf("active") > -1){
+//                  this.classList.remove("active");
+//              }else{
+//                  this.classList.add("active");
+//              }
+            }
+        }
+
+    // 使用getAttribute获取 data- 属性
+    var user = document . getElementById ( 'user' ) ;
+    var userName = plant . getAttribute ( 'data-uname' ) ; // userName = '脚本之家'
+    var userId = plant . getAttribute ( 'data-uid' ) ; // userId = '12345'
+
+    // 使用setAttribute设置 data- 属性
+    user . setAttribute ( 'data-site' , 'http://www.jb51.net' ) ;
+
+   function pp()
+       {
+        var i=document.getElementById("TxtNUmber").value;
+        var obj=document.getElementById("Text"+i);
+        obj.value="你选中我啦！";
+       }
+
+/*
+ * JQuery 加载模版 数据请求，微信端的页面案例
+*/
+var BASE_URL = "http://intel.apithink.com";
+var INTEL_API_URL = "http://42.159.145.69:3005/api"
+
+// 原生跳转方法
+function openURL(url){
+    window.location.href = BASE_URL + url;
+}
+
+// 根据加载设置文档 pageNo = 0,对应文档中的skip参数
+var pageNo = 0;
+var loadStatus = true;
+$(function(){
+    toast.loading({
+        title:"加载中",
+        duration:2000
+    },function(ret){
+        setTimeout(function(){
+            getData();
+        },500)
+    });
+});
+// 判断滚动到底部后加载数据
+$(window).scroll(function(){
+    var scrollTop = $(this).scrollTop();
+    var scrollHeight = $(document).height();
+    var windowHeight = $(this).height();
+    if(scrollTop + windowHeight == scrollHeight && loadStatus){
+        getData();
+    }
+});
+
+function getData(){
+    loadStatus = false;
+    $.ajax({
+        url:INTEL_API_URL +"/jyh_factresource",
+        type:"POST",
+        data:{
+            skip:pageNo,
+            limit:15
+        },
+        success:function(ret){
+            if(ret && ret.data && ret.data.length){
+                var tempFn = doT.template($("#list-tp1").html());
+                $("#list").append(tempFn(ret.data));
+                if(pageNo = 0){
+                    toast.hide();
+                }
+                pageNo++;
+                loadStatus = true;
+            }else{
+                if(pageNo == 0){
+                    $("#list").html('<p class="aui-text-center aui-padded-b-15">暂无数据</p>')
+                }else{
+                    $("#list").html('<p class="aui-text-center aui-padded-b-15">没有更多了</p>')
+                }
+                loadStatus = false;
+            }
+        }
+        error:function(){
+            toast.hide();
+            loadStatus = false;
+            $("#list").html('<p class="aui-text-center aui-padded-b-15 aui-padded-t-15">出错啦</p>');
+        }
+    })
+}
+
+// 原生ajax
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>

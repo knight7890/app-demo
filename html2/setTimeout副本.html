@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../css/swiper.min.css" />
+</head>
+<style>
+#qq { width:200px; height:400px; background:#F9C; }
+#title { width:240px; height:180px; background:#FC6; position:absolute; top:10px; left:220px; display:none; }
+</style>
+
+<body>
+    <div id="qq"></div>
+    <div id="title"></div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/swiper.min.js"></script>
+<script>
+window.onload = function(){
+    var qq = document.getElementById('qq');
+    var title = document.querySelector('#title');
+    var timer = null;
+    qq.onmouseover = show;
+    qq.onmouseout = hide;
+
+    title.onmouseover = show;
+    title.onmouseout = hide;
+
+    function show (){
+        clearInterval(timer);
+        title.style.display = 'block';
+    }
+    function hide (){
+        timer = setTimeout(function(){
+            title.style.display = 'none';
+        },500)
+    }
+}
+
+
+</script>
+</html>

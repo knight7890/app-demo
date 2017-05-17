@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+
+    	 html,
+    body{
+        padding: 0;
+        margin:0;
+    }
+    #div1{
+        position: relative;
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        left:-200px;
+    }
+    #share{
+        border: 1px solid blue;
+        padding: 4px 5px;
+        position:absolute;
+        left: 200px;
+        top:50px;
+        z-index: 3;
+    }
+
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <span id="share" >分享</span>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+ window.onload= function(){
+    var oDiv = document.querySelector('#div1');
+    oDiv.onmouseover=function(){//onmouseover
+        startMove(0);
+        //console.log(11);
+    }
+    oDiv.onmouseout=function(){
+        startMove(-200);
+        //console.log(22);
+    }
+    //alert(Math.floor(3.98));  //3向下取整
+    //alert(Math.ceil(3.8))     // 4 向上取证
+ }
+ var time =null;
+ function startMove(width){
+    clearInterval(time);
+    var oDiv = document.querySelector('#div1');
+    time = setInterval(function(){
+        var speed = (width-oDiv.offsetLeft)/20;
+        speed>0?Math.ceil(speed):Math.floor(speed);
+        if(oDiv.offsetLeft == width){
+            clearInterval(time);
+        }else{
+        oDiv.style.left = oDiv.offsetLeft+speed+'px';
+        }
+    },30)
+ }
+</script>
+</html>

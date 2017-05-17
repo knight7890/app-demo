@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	.red{
+
+		color:red;
+	}
+	.blue{
+
+		color:blue;
+	}
+	</style>
+</head>
+<body>
+	<div id="red" >红色</div>
+	<div id="blue" >蓝色</div>
+
+    输入数字（1或2或3或4）：<input id="TxtNUmber" type="text" />
+    <input id="btn" type="button"  onclick="pp()" />
+    <br/>
+    <br/>
+     <input id="Text1" type="text" value="1" />
+     <input id="Text2" type="text" />
+     <input id="Text3" type="text" />
+     <input id="Text4" type="text" />
+
+</body>
+<script type="text/javascript">
+	window.onload = function(){
+            document.onclick = function(e){
+                var target = e.target|| e.srcElement;
+                console.log(e.target + ":" +e.srcElement);
+                var color=target.id;
+                //console.log(color);
+
+                var divs=document.getElementsByTagName("div");
+                for(var i=0;i<divs.length;i++){
+                	//console.log(divs[i].id);
+                	if(divs[i].id === color){
+            			document.getElementById(divs[i].id).setAttribute("class", color);
+                	}else{
+                		document.getElementById(divs[i].id).setAttribute("class", "");
+                	}
+                }
+            }
+        }
+    function pp(){
+        var i = document.getElementById("TxtNUmber").value;
+        var obj = document.getElementById("Text" + i);
+        obj.value = "你选中我啦！";
+    }
+</script>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <style>
+
+
+    </style>
+</head>
+<body>
+    <input type="button" value="0"/>
+    <input type="button" value="0"/>
+    <input type="button" value="0"/>
+    <!-- <div>
+        <input type="button" value="btn1"/>
+        <input type="button" value="btn2"/>
+        <input type="button" value="btn3"/>
+    </div>
+    <p>a</p>
+    <p>b</p>
+    <p>c</p> -->
+</body>
+
+<script type="text/javascript">
+window.onload = function (){
+    var oBn = document.querySelectorAll('input');
+    var oP  = document.querySelectorAll('p');
+    var arr = ['A','B','C','D'];
+    for(var i =0;i<oBn.length;i++){
+        oBn[i].num = 0;
+        oBn[i].onclick = function(){
+            console.log(this.num);
+            this.value = arr[this.num];
+            this.num++;
+            if(this.num === oBn.length){
+            this.num == 1;
+            }
+        }
+    }
+
+    // var arr = ['张三','李四','王五'];
+    // for(var i =0;i<oBn.length;i++){
+    //     oBn[i].index = i; //自定义属性（索引值）
+    //     oBn[i].onclick = function(){
+    //         console.log(this.index)
+    //         this.value = arr[this.index];
+    //         oP[this.index].innerHTML = arr[this.index]
+    //     }
+    // }
+
+}
+</script>
+</html>
